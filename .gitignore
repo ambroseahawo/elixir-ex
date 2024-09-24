@@ -1,5 +1,16 @@
-# Created by https://www.toptal.com/developers/gitignore/api/elixir
-# Edit at https://www.toptal.com/developers/gitignore?templates=elixir
+# Created by https://www.toptal.com/developers/gitignore/api/elixir,phoenix,database
+# Edit at https://www.toptal.com/developers/gitignore?templates=elixir,phoenix,database
+
+### Database ###
+*.accdb
+*.db
+*.dbf
+*.mdb
+*.pdb
+*.sqlite3
+*.db-shm
+*.db-wal
+.DS_STORE
 
 ### Elixir ###
 /_build
@@ -12,8 +23,31 @@ erl_crash.dump
 *.beam
 /config/*.secret.exs
 .elixir_ls/
-fly.md
 
 ### Elixir Patch ###
 
-# End of https://www.toptal.com/developers/gitignore/api/elixir
+### Phoenix ###
+# gitignore template for Phoenix projects
+# website: http://www.phoenixframework.org/
+#
+# Recommended template: Elixir.gitignore
+
+# Temporary files
+/tmp
+
+# Static artifacts
+/node_modules
+/assets/node_modules
+
+# Since we are building assets from web/static,
+# we ignore priv/static. You may want to comment
+# this depending on your deployment strategy.
+/priv/static/
+
+# Installer-related files
+/installer/_build
+/installer/tmp
+/installer/doc
+/installer/deps
+
+# End of https://www.toptal.com/developers/gitignore/api/elixir,phoenix,database

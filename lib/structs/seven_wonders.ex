@@ -1,6 +1,6 @@
-defmodule Scripts.Structs.SevenWonders do
+defmodule Structs.SevenWonders do
   defstruct name: "", country: ""
-  alias Scripts.Structs.SevenWonders
+  alias Structs.SevenWonders
 
   @type t :: %SevenWonders{
           name: String.t(),
@@ -44,7 +44,7 @@ defmodule Scripts.Structs.SevenWonders do
   @spec in_countries_starting_with_i([t()]) :: [String.t()]
   def in_countries_starting_with_i(wonders) do
     wonders
-    |> Enum.filter(fn %{country: country} -> String.starts_with?(country,"I") end)
+    |> Enum.filter(fn %{country: country} -> String.starts_with?(country, "I") end)
   end
 
   @doc """
@@ -53,7 +53,7 @@ defmodule Scripts.Structs.SevenWonders do
   @spec sort_by_country_length([t]) :: [t()]
   def sort_by_country_length(wonders) do
     wonders
-    |> Enum.sort(fn x,y -> String.length(x.country) < String.length(y.country) end)
+    |> Enum.sort(fn x, y -> String.length(x.country) < String.length(y.country) end)
   end
 
   @doc """
@@ -75,7 +75,7 @@ defmodule Scripts.Structs.SevenWonders do
     # wonders
     # |> Enum.map(fn wonder -> wonder.name end) # method one
     # |> Enum.map(&(&1.name)) # method two, shorthand anonymous function
-    for %{name: name} <- wonders, do: name # for comprehension
+    # for comprehension
+    for %{name: name} <- wonders, do: name
   end
-
 end

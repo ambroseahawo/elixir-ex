@@ -1,4 +1,4 @@
-defmodule Scripts.Recursion.Factorial do
+defmodule Recursion.Factorial do
   def of(1), do: 1
   def of(num), do: num * of(num - 1)
 

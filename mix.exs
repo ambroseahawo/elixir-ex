@@ -1,9 +1,9 @@
-defmodule Scripts.MixProject do
+defmodule ElixirEX.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :scripts,
+      app: :elixirex,
       version: "0.1.0",
       elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,

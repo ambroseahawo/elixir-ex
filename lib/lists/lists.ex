@@ -1,4 +1,4 @@
-defmodule Scripts.Lists do
+defmodule Lists do
   @moduledoc """
 
   Function Summary:
@@ -17,7 +17,7 @@ defmodule Scripts.Lists do
   def sum_simple([h | t]), do: h + sum_simple(t)
 
   @spec sum_tail_rec(list(number()), integer()) :: number()
-  def sum_tail_rec(nums,acc \\ 0)
+  def sum_tail_rec(nums, acc \\ 0)
   def sum_tail_rec([], acc), do: acc
   def sum_tail_rec([h | t], acc), do: sum_tail_rec(t, acc + h)
 
@@ -46,7 +46,7 @@ defmodule Scripts.Lists do
   def concat(src, dst), do: concat_func(src |> reverse(), dst)
 
   defp concat_func([], dst), do: dst
-  defp concat_func([h | t], dst), do:  concat_func(t, [h | dst])
+  defp concat_func([h | t], dst), do: concat_func(t, [h | dst])
 
   @doc """
     flat map

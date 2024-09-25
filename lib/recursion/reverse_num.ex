@@ -1,4 +1,4 @@
-defmodule Scripts.Recursion.ReverseNum do
+defmodule Recursion.ReverseNum do
   def of(num, acc \\ 0)
   def of(0, acc), do: acc
 
@@ -7,5 +7,4 @@ defmodule Scripts.Recursion.ReverseNum do
     new_acc = acc * 10 + rem(num, 10)
     of(new_num, new_acc)
   end
-
 end

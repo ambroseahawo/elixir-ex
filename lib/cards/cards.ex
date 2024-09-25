@@ -1,5 +1,4 @@
-defmodule Scripts.Cards do
-
+defmodule Cards do
   @moduledoc """
   This module provides methods for creating and handling a deck of cards.
   """
@@ -8,7 +7,22 @@ defmodule Scripts.Cards do
     Returns a list of strings representing a deck of playing cards.
   """
   def create_deck do
-    values = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
+    values = [
+      "Ace",
+      "Two",
+      "Three",
+      "Four",
+      "Five",
+      "Six",
+      "Seven",
+      "Eight",
+      "Nine",
+      "Ten",
+      "Jack",
+      "Queen",
+      "King"
+    ]
+
     suits = ["Spades", "Clubs", "Hearts", "Diamonds"]
 
     # match values to suits
@@ -28,8 +42,8 @@ defmodule Scripts.Cards do
     for suit <- suits, value <- values do
       "#{value} of #{suit}"
     end
-
   end
+
   # the number of arguments that a function accepts is known as arity
   def shuffle(deck) do
     Enum.shuffle(deck)
@@ -105,9 +119,9 @@ defmodule Scripts.Cards do
     # when using pipe operator, we do not need to do any assignment to a temporary variable.
     # the result of each function is automatically sent to the next function in the chain
     # the pipe operator demands the methods to take consistent first arguments to work properly.
-     Cards.create_deck()
-     |> Cards.shuffle()
-     |> Cards.deal(hand_size)
+    Cards.create_deck()
+    |> Cards.shuffle()
+    |> Cards.deal(hand_size)
   end
 
   # maps, keyword lists

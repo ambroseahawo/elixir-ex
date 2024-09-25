@@ -72,4 +72,6 @@ defmodule Lists do
   def flat_map(elements, func, acc \\ [])
   def flat_map([], _, acc), do: acc
   def flat_map([h | t], func, acc), do: flat_map(t, func, concat(acc, func.(h)))
+
+  def enum_flatten(nums_list), do: Enum.flat_map(nums_list, fn x -> [x, x * 3] end)
 end

@@ -52,6 +52,12 @@ defmodule Lists do
   def map([h | t], func, acc), do: map(t, func, [func.(h) | acc])
 
   @doc """
+  enum.map
+  """
+  def enum_map(nums_list), do: Enum.map(nums_list, fn x -> String.to_atom(x) end)
+  def enum_map_short(nums_list), do: Enum.map(nums_list, &String.to_atom/1)
+
+  @doc """
     concat
   """
   @spec concat([any], [any]) :: [any]

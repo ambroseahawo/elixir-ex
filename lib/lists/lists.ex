@@ -22,6 +22,18 @@ defmodule Lists do
   def sum_tail_rec([h | t], acc), do: sum_tail_rec(t, acc + h)
 
   @doc """
+  Return sum of number in a list using enum module
+  """
+  @spec sum_enum(list(number())) :: number()
+  def sum_enum(nums_list), do: Enum.reduce(nums_list, fn x, acc -> x + acc end)
+
+  @doc """
+  Return filtered list using enum module
+  """
+  @spec filter_enum(list(number())) :: list()
+  def filter_enum(nums_list), do: Enum.filter(nums_list, fn x -> x > 2 end)
+
+  @doc """
   reverse contents ina list
   """
   @spec reverse([any()], [any()]) :: [any()]

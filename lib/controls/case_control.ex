@@ -2,7 +2,7 @@ defmodule Controls.CaseControl do
   @doc """
   case control
   """
-  # @spec case_control(String) :: String
+  @spec case_gender(String.t()) :: String.t()
   def case_gender(gender) do
     # case gender do
     #   "m" -> "Male"

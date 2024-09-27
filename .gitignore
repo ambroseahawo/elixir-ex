@@ -35,6 +35,9 @@ erl_crash.dump
 # Temporary files
 /tmp
 fly.md
+Notes.md
+data*
+test*
 # Static artifacts
 /node_modules
 /assets/node_modules

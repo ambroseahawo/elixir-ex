@@ -1,4 +1,6 @@
 defmodule Lists.Cards do
+  alias Lists.Cards
+
   @moduledoc """
   This module provides methods for creating and handling a deck of cards.
   """

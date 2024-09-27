@@ -1,4 +1,4 @@
-defmodule Cards do
+defmodule Lists.Cards do
   @moduledoc """
   This module provides methods for creating and handling a deck of cards.
   """

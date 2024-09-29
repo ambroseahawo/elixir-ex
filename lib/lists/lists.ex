@@ -1,10 +1,43 @@
 defmodule Lists do
   @moduledoc """
-
-  Function Summary:
-
-  1. sum
+  Lists module demonstrating actions on lists
   """
+
+  @doc """
+  return sample list
+  """
+  def sample_list, do: [2, 3, 5, "some", :ok]
+
+  @doc """
+  Insert at Index
+  If no list is provided, defaults to `sample_list/0`.
+  """
+  @spec insert_element(list(), integer(), any()) :: {:ok, list()} | {:error, String.t()}
+  def insert_element(list \\ sample_list(), index, value)
+
+  # main clause that performs the insert
+  def insert_element(list, index, value) when is_list(list) and is_integer(index) do
+    actual_index = handle_negative_index(list, index)
+
+    if actual_index >= 0 and actual_index < length(list) do
+      {:ok, List.insert_at(list, index, value)}
+    else
+      {:error, "Index out of range"}
+    end
+  end
+
+  # fallback clause for invalid inputs
+  def insert_element(_, _, _), do: {:error, "Invalid inputs"}
+
+  @spec handle_negative_index(list(), integer()) :: integer()
+  defp handle_negative_index(list, index) do
+    if index < 0, do: length(list) + index, else: index
+  end
+
+
+
+
+
 
   @doc """
   Returns the sum of numbers in a list

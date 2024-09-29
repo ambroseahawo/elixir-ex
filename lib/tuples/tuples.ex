@@ -14,12 +14,12 @@ defmodule Tuples do
   If no tuple is provided, defaults to `sample_tuple/0`.
   """
   @spec access_element(tuple(), integer()) :: {:ok, any()} | {:error, String.t()}
-  def access_element(tuple_data \\ sample_tuple(), element_index)
+  def access_element(tuple \\ sample_tuple(), index)
 
   # main clause that performs the tuple access
-  def access_element(tuple_data, element_index) when is_tuple(tuple_data) do
-    if element_index < tuple_size(tuple_data) and element_index >= 0 do
-      {:ok, elem(tuple_data, element_index)}
+  def access_element(tuple, index) when is_tuple(tuple) do
+    if index < tuple_size(tuple) and index >= 0 do
+      {:ok, elem(tuple, index)}
     else
       {:error, "Index out of range"}
     end
@@ -33,12 +33,12 @@ defmodule Tuples do
   If no tuple is provided, defaults to `sample_tuple/0`.
   """
   @spec update_element(tuple(), integer(), any()) :: {:ok, tuple()} | {:error, String.t()}
-  def update_element(tuple_data \\ sample_tuple(), element_index, value)
+  def update_element(tuple \\ sample_tuple(), index, value)
 
   # main clause that performs the tuple update
-  def update_element(tuple_data, element_index, value) when is_tuple(tuple_data) do
-    if element_index < tuple_size(tuple_data) and element_index >= 0 do
-      {:ok, put_elem(tuple_data,element_index,value)}
+  def update_element(tuple, index, value) when is_tuple(tuple) do
+    if index < tuple_size(tuple) and index >= 0 do
+      {:ok, put_elem(tuple,index,value)}
     else
       {:error, "Index out of range"}
     end
@@ -52,16 +52,19 @@ defmodule Tuples do
   If no tuple is provided, defaults to `sample_tuple/0`.
   """
   @spec insert_element(tuple(), integer(),any()) :: {:ok, tuple()} | {:error, String.t()}
-  def insert_element(tuple_data \\ sample_tuple(), element_index, value)
+  def insert_element(tuple \\ sample_tuple(), index, value)
 
   # main clause that performs the insert
-  def insert_element(tuple_data, element_index, value) when is_tuple(tuple_data) do
-    list = Tuple.to_list(tuple_data)
-    if element_index <= length(list) and element_index >= 0 do
-      # {:ok, List.to_tuple(List.insert_at(list,element_index,value))}
-      {:ok, list |> List.insert_at(element_index, value) |> List.to_tuple}
-    else
+  def insert_element(tuple, index, value) when is_tuple(tuple) do
+    list = Tuple.to_list(tuple)
+    # handle negative index
+    actual_index = if index < 0, do: length(list) + index, else: index
+
+    if actual_index < 0 or actual_index > length(list) - 1 do
       {:error, "Index out of range"}
+    else
+      # {:ok, List.to_tuple(List.insert_at(list,index,value))}
+      {:ok, list |> List.insert_at(index, value) |> List.to_tuple}
     end
   end
 
@@ -73,17 +76,20 @@ defmodule Tuples do
   If no tuple is provided, defaults to `sample_tuple/0`.
   """
   @spec delete_element(tuple(), integer()) :: {:ok, tuple()} | {:error, String.t()}
-  def delete_element(tuple_data \\ sample_tuple(), element_index)
+  def delete_element(tuple \\ sample_tuple(), index)
 
   # main clause that performs the deletion
-  def delete_element(tuple_data, element_index) when is_tuple(tuple_data) do
-    list = Tuple.to_list(tuple_data)
+  def delete_element(tuple, index) when is_tuple(tuple) do
+    list = Tuple.to_list(tuple)
 
-    if element_index < length(list) and element_index >= 0 do
-      # {:ok, List.to_tuple(List.delete_at(list, element_index))}
-      {:ok, list |> List.delete_at(element_index) |> List.to_tuple}
-    else
+    # handle negative index
+    actual_index = if index < 0, do: length(list) + index, else: index
+
+    if actual_index < 0 or actual_index > length(list) - 1 do
       {:error, "Index out of range"}
+    else
+      # {:ok, List.to_tuple(List.delete_at(list, index))}
+      {:ok, list |> List.delete_at(index) |> List.to_tuple}
     end
   end
 

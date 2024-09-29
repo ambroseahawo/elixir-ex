@@ -9,14 +9,35 @@ defmodule Lists do
   def sample_list, do: [2, 3, 5, "some", :ok]
 
   @doc """
+  Get at Index:
+  If no list is provided, defaults to `sample_list/0`.
+  """
+  @spec get_by_index(list(), integer()) :: {:ok, any()} | {:error, String.t()}
+  def get_by_index(list \\ sample_list(), index)
+
+  # main clause that performs the access
+  def get_by_index(list, index) when is_list(list) and is_integer(index) do
+    actual_index = handle_negative_index(list, index)
+
+    if actual_index >= 0 and actual_index < length(list) do
+      {:ok, Enum.at(list, index)}
+    else
+      {:error, "Index out of range"}
+    end
+  end
+
+  # fallback clause for invalid inputs
+  def get_by_index(_, _), do: {:error, "Invalid inputs"}
+
+  @doc """
   Insert at Index
   If no list is provided, defaults to `sample_list/0`.
   """
-  @spec insert_element(list(), integer(), any()) :: {:ok, list()} | {:error, String.t()}
-  def insert_element(list \\ sample_list(), index, value)
+  @spec insert_by_index(list(), integer(), any()) :: {:ok, list()} | {:error, String.t()}
+  def insert_by_index(list \\ sample_list(), index, value)
 
   # main clause that performs the insert
-  def insert_element(list, index, value) when is_list(list) and is_integer(index) do
+  def insert_by_index(list, index, value) when is_list(list) and is_integer(index) do
     actual_index = handle_negative_index(list, index)
 
     if actual_index >= 0 and actual_index < length(list) do
@@ -27,7 +48,48 @@ defmodule Lists do
   end
 
   # fallback clause for invalid inputs
-  def insert_element(_, _, _), do: {:error, "Invalid inputs"}
+  def insert_by_index(_, _, _), do: {:error, "Invalid inputs"}
+
+  @doc """
+  Update at Index
+  If no list is provided, defaults to `sample_list/0`.
+  """
+  @spec update_by_index(list(), integer(), any()) :: {:ok, list()} | {:error, String.t()}
+  def update_by_index(list \\ sample_list(), index, value)
+
+  # main clause that performs the update
+  def update_by_index(list, index, value) when is_list(list) and is_integer(index) do
+    actual_index = handle_negative_index(list, index)
+
+    if actual_index >= 0 and actual_index < length(list) do
+      {:ok, List.replace_at(list, index, value)}
+    else
+      {:error, "index out of range"}
+    end
+  end
+
+  # fallback clause for invalid inputs
+  def update_by_index(_, _, _), do: {:error, "Invalid inputs"}
+
+
+  @doc """
+  Delete at Index
+  """
+  @spec delete_by_index(list(), integer()) :: {:ok, list()} | {:error, String.t()}
+  def delete_by_index(list \\ sample_list(), index)
+
+  def delete_by_index(list, index) when is_list(list) and is_integer(index) do
+    actual_index = handle_negative_index(list, index)
+
+    if actual_index >= 0 and actual_index < length(list) do
+      {:ok, List.delete_at(list, index)}
+    else
+      {:error, "Index out of range"}
+    end
+  end
+
+  # fallback clause for invalid input
+  def delete_by_index(_, _), do: {:error, "Invalid inputs"}
 
   @spec handle_negative_index(list(), integer()) :: integer()
   defp handle_negative_index(list, index) do

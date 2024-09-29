@@ -32,7 +32,7 @@ defmodule Tuples do
   Updating Elements in a tuple
   If no tuple is provided, defaults to `sample_tuple/0`.
   """
-  @spec update_element(tuple(),integer(), any()) :: {:ok, tuple()} | {:error, String.t()}
+  @spec update_element(tuple(), integer(), any()) :: {:ok, tuple()} | {:error, String.t()}
   def update_element(tuple_data \\ sample_tuple(), element_index, value)
 
   # main clause that performs the tuple update
@@ -51,7 +51,7 @@ defmodule Tuples do
   Inserting into Tuple (Using Lists)
   If no tuple is provided, defaults to `sample_tuple/0`.
   """
-  @spec insert_element(tuple(),integer(),any()) :: {:ok, tuple()} | {:error, String.t()}
+  @spec insert_element(tuple(), integer(),any()) :: {:ok, tuple()} | {:error, String.t()}
   def insert_element(tuple_data \\ sample_tuple(), element_index, value)
 
   # main clause that performs the insert
@@ -67,5 +67,27 @@ defmodule Tuples do
 
   # fallback clause for invalid inputs
   def insert_element(_,_,_), do: {:error, "Invalid tuple"}
+
+  @doc """
+  Deleting from Tuple (Using Lists)
+  If no tuple is provided, defaults to `sample_tuple/0`.
+  """
+  @spec delete_element(tuple(), integer()) :: {:ok, tuple()} | {:error, String.t()}
+  def delete_element(tuple_data \\ sample_tuple(), element_index)
+
+  # main clause that performs the deletion
+  def delete_element(tuple_data, element_index) when is_tuple(tuple_data) do
+    list = Tuple.to_list(tuple_data)
+
+    if element_index < length(list) and element_index >= 0 do
+      # {:ok, List.to_tuple(List.delete_at(list, element_index))}
+      {:ok, list |> List.delete_at(element_index) |> List.to_tuple}
+    else
+      {:error, "Index out of range"}
+    end
+  end
+
+  # fallback clause for invalid inputs
+  def delete_element(_,_), do: {:error, "Invalid tuple"}
 
 end

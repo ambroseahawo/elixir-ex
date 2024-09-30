@@ -87,6 +87,21 @@ defmodule Lists do
   # fallback clause for invalid inputs
   def update_by_index(_, _, _), do: {:error, "Invalid inputs"}
 
+  @doc """
+  Update by Value:
+  Updates all occurrences of a value in the list.
+  """
+  @spec update_by_value(list(), any(), any()) :: {:ok, list()} | {:error, String.t()}
+  def update_by_value(list \\ sample_list(), old_value, new_value)
+
+  # main clause
+  def update_by_value(list, old_value, new_value) when is_list(list) do
+    # {:ok, Enum.map(list, fn x -> if x == old_value, do: new_value, else: x end)}
+    {:ok, Enum.map(list, &(if &1 == old_value, do: new_value, else: &1))}
+  end
+
+  # fallback
+  def update_by_value(_, _, _), do: {:error, "Invalid inputs"}
 
   @doc """
   Delete at Index

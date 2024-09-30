@@ -30,6 +30,21 @@ defmodule Lists do
   def get_by_index(_, _), do: {:error, "Invalid inputs"}
 
   @doc """
+  Get by value;- filter all matching occurrences
+  If no list is provided, defaults to `sample_list/0`.
+  """
+  @spec get_by_value(list(), any()) :: {:ok, list()} | {:error, String.t()}
+  def get_by_value(list \\ sample_list(), value)
+
+  # main clause that performs the get
+  def get_by_value(list, value) when is_list(list) do
+    {:ok, Enum.filter(list, fn x -> x == value end)}
+  end
+
+  # fallback clause
+  def get_by_value(_, _), do: {:error, "Invalid inputs"}
+
+  @doc """
   Insert at Index
   If no list is provided, defaults to `sample_list/0`.
   """

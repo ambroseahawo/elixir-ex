@@ -39,6 +39,7 @@ defmodule Lists do
   # main clause that performs the insert
   def insert_by_index(list, index, value) when is_list(list) and is_integer(index) do
     actual_index = handle_negative_index(list, index)
+    IO.inspect(actual_index)
 
     if actual_index >= 0 and actual_index < length(list) do
       {:ok, List.insert_at(list, index, value)}
@@ -74,10 +75,12 @@ defmodule Lists do
 
   @doc """
   Delete at Index
+  If no list is provided, defaults to `sample_list/0`.
   """
   @spec delete_by_index(list(), integer()) :: {:ok, list()} | {:error, String.t()}
   def delete_by_index(list \\ sample_list(), index)
 
+  # main clause that performs the delete
   def delete_by_index(list, index) when is_list(list) and is_integer(index) do
     actual_index = handle_negative_index(list, index)
 
@@ -90,6 +93,22 @@ defmodule Lists do
 
   # fallback clause for invalid input
   def delete_by_index(_, _), do: {:error, "Invalid inputs"}
+
+  @doc """
+  Delete by value; deletes all occurrences
+  If no list is provided, defaults to `sample_list/0`.
+  """
+  @spec delete_by_value(list(), any()) :: {:ok, list()} | {:error, String.t()}
+  def delete_by_value(list \\ sample_list(), value)
+
+  # main clause that performs the delete
+  def delete_by_value(list, value) when is_list(list) do
+    # {:ok, Enum.reject(list, fn x -> x == value end)}
+    {:ok, Enum.reject(list, &(&1 == value))}
+  end
+
+  # fallback for invalid inputs
+  def delete_by_value(_, _), do: {:error, "Invalid inputs"}
 
   @spec handle_negative_index(list(), integer()) :: integer()
   defp handle_negative_index(list, index) do
@@ -129,7 +148,7 @@ defmodule Lists do
   def filter_enum(nums_list), do: Enum.filter(nums_list, fn x -> x > 2 end)
 
   @doc """
-  reverse contents ina list
+  reverse contents in a list
   """
   @spec reverse([any()], [any()]) :: [any()]
   def reverse(elements, acc \\ [])
